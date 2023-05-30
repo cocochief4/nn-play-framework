@@ -29,7 +29,9 @@ public class FileReaderAndWriter {
 
                 double[] row = new double[values.length];
                 for (int i = 0; i < values.length; i++) {
-                    row[i] = Double.parseDouble(values[i]);
+                    if (!values[i].trim().equals("")) {
+                        row[i] = Double.parseDouble(values[i]);
+                    }
                 }
                 data.add(row);
 
