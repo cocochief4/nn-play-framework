@@ -8,16 +8,41 @@ import com.google.gson.stream.JsonReader;
 import org.ejml.data.Matrix;
 import org.ejml.simple.SimpleOperations;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by KimFeichtinger on 26.04.18.
  */
 public class FileReaderAndWriter {
 
-    public static void writeToFile(NeuralNetwork nn, String fileName){
+    public static ArrayList<double[]> readCSVFile(String filePath) {
+        ArrayList<double[]> data = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+
+                double[] row = new double[values.length];
+                for (int i = 0; i < values.length; i++) {
+                    row[i] = Double.parseDouble(values[i]);
+                }
+                data.add(row);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Check if your csv file contains values that aren't doubles.");
+        }
+
+        return data;
+    }
+
+    public static void writeToFile(NeuralNetwork nn, String fileName) {
         String name = fileName;
 
         if (fileName == null) {
@@ -56,7 +81,7 @@ public class FileReaderAndWriter {
     }
 
     // Get a GsonBuilder-object with all the needed TypeAdapters added
-    private static GsonBuilder getGsonBuilder(){
+    private static GsonBuilder getGsonBuilder() {
         GsonBuilder gsonBuilder = new GsonBuilder();
 
         gsonBuilder.registerTypeAdapter(ActivationFunction.class, new InterfaceAdapter<ActivationFunction>());
