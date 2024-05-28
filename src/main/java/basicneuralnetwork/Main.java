@@ -24,8 +24,9 @@ public class Main {
 
         for (int epoch = 0; epoch < MAX_EPOCHS; epoch++) {
             batchTrain(train, nn);
-            testNN(test,nn);
         }
+
+        testNN(test,nn);
     }
 
     private static void testNN(ArrayList<double[]> test, NeuralNetwork nn) {
