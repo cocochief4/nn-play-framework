@@ -30,6 +30,10 @@ public class Main {
     }
 
     private static void testNN(ArrayList<double[]> test, NeuralNetwork nn) {
+        // ** warning **  test does NOT just contain the feature vector.  It's the entire row from the file.
+        // make a feature vector that's all the numbers except the last one.
+        // get the correct label, which is the last number in the row
+
         // TODO: loop over each element of the test data
         // TODO: extract the feature vector from the row
         // TODO: run output = nn.guess(...) to get the networks predictions
@@ -39,6 +43,10 @@ public class Main {
     }
 
     private static void batchTrain(ArrayList<double[]> train, NeuralNetwork nn) {
+        // ** warning **  test does NOT just contain the feature vector.  It's the entire row from the file.
+        // make a feature vector that's all the numbers except the last one.
+        // get the correct label, which is the last number in the row
+
         // TODO: loop over each row in train
         // TODO: extract the feature vector you want (for iris, it's the first 4 elements in each row)
         // TODO: construct the correct output vector (for iris it's a length 3 double array with 1 marked in the index
@@ -46,12 +54,19 @@ public class Main {
         // TODO: run nn.train(...)
     }
 
+    /***
+     * This method is passed an EMPTY train and test list.  csvData represents all the data.
+     * You will randomly divide the data up and add it to train and test.
+     * Use percentForTesting to determine what percent of the overall data should get added to test.
+     * @param csvData all the data
+     * @param train empty list to be filled with training data
+     * @param test empty list to be filled with test data
+     * @param percentForTesting overall percent to be added to test list
+     */
     private static void splitData(ArrayList<double[]> csvData, ArrayList<double[]> train, ArrayList<double[]> test, double percentForTesting){
         Collections.shuffle(csvData);
-
         // TODO: calculate # of items from csvData that should get added to test
         // TODO: add correct # of rows from csvData to test
         // TODO: add ther est to train
     }
-
 }
